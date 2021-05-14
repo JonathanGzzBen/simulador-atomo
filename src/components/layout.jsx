@@ -22,7 +22,10 @@ export default function Layout({ children }) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link href="/" passHref>
-              <Nav.Link>Inicio</Nav.Link>
+              <Nav.Link>Simulador</Nav.Link>
+            </Link>
+            <Link href="/Teoria" passHref>
+              <Nav.Link>Teoría</Nav.Link>
             </Link>
             <Link href="/AcercaDe" passHref>
               <Nav.Link>Acerca De</Nav.Link>
