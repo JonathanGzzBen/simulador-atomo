@@ -1,204 +1,168 @@
 import React, { useState } from "react";
 import {
-  Container,
   Row,
   Col,
   Image,
-  Form,
   InputGroup,
   FormControl,
+  Form,
 } from "react-bootstrap";
 
 export default function Simulator() {
-  const [fisicaGalileana, setFisicaGalileana] = useState(true);
-  const [v, setV] = useState("");
-  const [v1, setV1] = useState("");
-  const [v2, setV2] = useState("");
+  const [n, setN] = useState("");
+  const [z, setZ] = useState("");
 
-  const calculateV1 = (v, v2, fisicaGalileana) =>
-    fisicaGalileana
-      ? Number(v2) + Number(v)
-      : (Number(v2) + Number(v)) / (1 + Number(v2) * Number(v));
-
-  const calculateV2 = (v, v1, fisicaGalileana) =>
-    fisicaGalileana
-      ? Number(v1) - Number(v)
-      : (Number(v1) - Number(v)) / (1 - Number(v1) * Number(v));
-
-  const setIfIsValidPhysicalPhysicsString = (value, setter) => {
-    if (0 <= Number(value) && Number(value) < 1) {
-      setter();
-    } else if (value === "-" || (-1 < Number(value) && Number(value) < 0)) {
-      setter();
-    }
+  const getEnergiaDeNivel = (z, n) => {
+    return -((13.6 * (z * z)) / (n * n));
   };
 
-  const handleVChange = (v) => {
-    const setVAndCalculate = () => {
-      setV(v);
-      if (v1 === "") {
-      } else {
-        setV2(calculateV2(v, v1, fisicaGalileana));
-      }
-    };
-
-    fisicaGalileana
-      ? setVAndCalculate()
-      : setIfIsValidPhysicalPhysicsString(v, setVAndCalculate);
+  const getEnergiaDeExcitacion = (z, n) => {
+    return 13.6 * (z * z) * (1 - 1 / (n * n));
   };
 
-  const handleV1Change = (v1) => {
-    const setV1AndCalculate = () => {
-      setV1(v1);
-      setV2(calculateV2(v, Number(v1), fisicaGalileana));
-    };
-    fisicaGalileana
-      ? setV1AndCalculate()
-      : setIfIsValidPhysicalPhysicsString(v1, setV1AndCalculate);
+  const getEnergiaDeIonizacion = (z, n) => {
+    return (13.6 * (z * z)) / (n * n);
   };
 
-  const handleV2Change = (v2) => {
-    const setV2AndCalculate = () => {
-      setV2(v2);
-      setV1(calculateV1(v, Number(v2), fisicaGalileana));
-    };
-    fisicaGalileana
-      ? setV2AndCalculate()
-      : setIfIsValidPhysicalPhysicsString(v2, setV2AndCalculate);
-  };
-
-  const handleTipoFisicaChange = (tipoFisica) => {
-    const fisicaGalileana = tipoFisica === "galileana";
-    setFisicaGalileana(fisicaGalileana);
-    if (fisicaGalileana) {
-      setV2(calculateV2(v, v1, fisicaGalileana));
-    } else {
-      if (!(-1 < Number(v1) && Number(v1) < 1)) {
-        setV1("0");
-      }
-      if (!(-1 < Number(v2) && Number(v2) < 1)) {
-        setV2("0");
-      }
-      if (!(-1 < Number(v) && Number(v) < 1)) {
-        setV("0");
-      }
-    }
+  const getEnergiaDeEnlace = (z, n) => {
+    return (13.6 * (z * z)) / (n * n);
   };
 
   return (
-    <Container className="mt-4 mb-4">
-      <Row className="ml-3 mr-3">
-        <Form>
-          <fieldset>
-            <Form.Group
-              controlId="tipo-fisica"
-              onChange={(e) => handleTipoFisicaChange(e.target.value)}
-            >
-              <Form.Check
-                type="radio"
-                value="galileana"
-                defaultChecked
-                name="tipo-fisica"
-                label="Física Galileana"
+    <>
+      <h1>Simulador de problemas del átomo</h1>
+      <Row className="pt-3">
+        <Col>
+          <Image fluid src="https://via.placeholder.com/350"></Image>
+        </Col>
+        <Col>
+          <InputGroup className="pt-2">
+            <InputGroup.Prepend>
+              <InputGroup.Text id="input-n">n = </InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              placeholder="Nivel de órbita"
+              aria-label="n"
+              aria-describedby="input-n"
+              value={n}
+              onChange={(e) =>
+                Number(e.target.value) >= 1 ? setN(e.target.value) : ""
+              }
+            />
+          </InputGroup>
+          <Form.Text className="text-muted">Valor mayor o igual a 1</Form.Text>
+          <InputGroup className="pt-2">
+            <InputGroup.Prepend>
+              <InputGroup.Text id="input-z">Z = </InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              placeholder="Número atómico"
+              aria-label="z"
+              aria-describedby="input-x"
+              value={z}
+              onChange={(e) =>
+                e.target.value >= 0 && e.target.value <= 50
+                  ? setZ(e.target.value)
+                  : ""
+              }
+            />
+          </InputGroup>
+          <Form.Text className="text-muted">Valor entre 0 y 50</Form.Text>
+          <h2 className="pt-3">Energías</h2>
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text id="output-energia-nivel">
+                E<sub>n</sub>=
+              </InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              readOnly
+              placeholder="Energía de nivel"
+              aria-label="Energía de nivel"
+              aria-describedby="output-energia-nivel"
+              value={getEnergiaDeNivel(z, n) || ""}
+            />
+            <InputGroup.Append>
+              <InputGroup.Text>eV</InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text id="output-energia-excitacion">
+                E<sub>E</sub>=
+              </InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              readOnly
+              placeholder="Energía de excitación"
+              aria-label="Energía de excitación"
+              aria-describedby="output-energia-excitacion"
+              value={getEnergiaDeExcitacion(z, n) || ""}
+            />
+            <InputGroup.Append>
+              <InputGroup.Text>eV</InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+          {n === "1" && (
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text id="output-energia-ionizacion">
+                  E<sub>i</sub>=
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                readOnly
+                placeholder="Energía de ionización"
+                aria-label="Energía de ionización"
+                aria-describedby="output-energia-ionizacion"
+                value={getEnergiaDeIonizacion(z, n) || ""}
               />
-              <Form.Check
-                type="radio"
-                value="clasica"
-                name="tipo-fisica"
-                label="Física Clásica"
+              <InputGroup.Append>
+                <InputGroup.Text>eV</InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
+          )}
+          {n !== "1" && (
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text id="output-energia-enlace">
+                  E<sub>e</sub>=
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                readOnly
+                placeholder="Energía de enlace"
+                aria-label="Energía de enlace"
+                aria-describedby="output-energia-enlace"
+                value={getEnergiaDeEnlace(z, n) || ""}
               />
-            </Form.Group>
-          </fieldset>
-        </Form>
-      </Row>
-      <Row className="ml-3 mr-3">
-        <Col>
-          <Image
-            src={
-              v > 0
-                ? "/images/rocket-right.png"
-                : v < 0
-                ? "/images/rocket-left.png"
-                : "/images/rocket.png"
-            }
-            fluid
-            className="pt-2 pb-2"
-          ></Image>
-          <Container fluid style={{ padding: "0" }}>
-            <Form>
-              <h2>Marco 2</h2>
-              <Form.Label>v</Form.Label>
-              <InputGroup>
-                <FormControl
-                  placeholder="v"
-                  aria-label="v"
-                  aria-describedby="c-v"
-                  value={v}
-                  onChange={(e) => handleVChange(e.target.value)}
-                  autoComplete="off"
-                />
-                <InputGroup.Append>
-                  <InputGroup.Text id="c-v">c</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-            </Form>
-          </Container>
-        </Col>
-        <Col>
-          <Image
-            src={
-              v1 > 0
-                ? "/images/rocket-right.png"
-                : v1 < 0
-                ? "/images/rocket-left.png"
-                : "/images/rocket.png"
-            }
-            fluid
-            className="pt-2 pb-2"
-          ></Image>
-          <Container fluid style={{ padding: "0" }}>
-            <Form>
-              <h2>Evento</h2>
-              <Form.Label>v1</Form.Label>
-              <InputGroup>
-                <FormControl
-                  placeholder="v1"
-                  aria-label="v1"
-                  aria-describedby="c-v1"
-                  value={v1}
-                  onChange={(e) => handleV1Change(e.target.value)}
-                  autoComplete="off"
-                />
-                <InputGroup.Append>
-                  <InputGroup.Text id="c-v1">c</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-              <Form.Label>v2</Form.Label>
-              <InputGroup>
-                <FormControl
-                  placeholder="v2"
-                  aria-label="v2"
-                  aria-describedby="c-v2"
-                  value={v2}
-                  onChange={(e) => handleV2Change(e.target.value)}
-                  autoComplete="off"
-                />
-                <InputGroup.Append>
-                  <InputGroup.Text id="c-v2">c</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-            </Form>
-          </Container>
-        </Col>
-        <Col>
-          <Image src="/images/earth.png" fluid className="pt-2 pb-2"></Image>
-          <Container fluid style={{ padding: "0" }}>
-            <Form>
-              <h2>Marco 1</h2>
-            </Form>
-          </Container>
+              <InputGroup.Append>
+                <InputGroup.Text>eV</InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
+          )}
         </Col>
       </Row>
-    </Container>
+      <Row className="pt-3">
+        <p>Donde:</p>
+        <br />
+        <ul>
+          <li>n = Nivel, órbita o número cuántico</li>
+          <li>Z = Número atómico del elemento</li>
+          <li>
+            E<sub>n</sub>= Energía de nivel
+          </li>
+          <li>
+            E<sub>E</sub>= Energía de excitación
+          </li>
+          <li>
+            E<sub>i</sub>= Energía de ionización
+          </li>
+          <li>
+            E<sub>e</sub>= Energía de enlace
+          </li>
+        </ul>
+      </Row>
+    </>
   );
 }
