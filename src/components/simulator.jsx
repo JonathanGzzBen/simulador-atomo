@@ -7,6 +7,7 @@ import {
   FormControl,
   Form,
 } from "react-bootstrap";
+import Head from "next/head";
 
 export default function Simulator() {
   const [n, setN] = useState("");
@@ -30,6 +31,9 @@ export default function Simulator() {
 
   return (
     <>
+      <Head>
+        <title>Simulador Átomo</title>
+      </Head>
       <h1>Simulador de problemas del átomo</h1>
       <Row className="pt-3">
         <Col>
@@ -86,23 +90,25 @@ export default function Simulator() {
               <InputGroup.Text>eV</InputGroup.Text>
             </InputGroup.Append>
           </InputGroup>
-          <InputGroup>
-            <InputGroup.Prepend>
-              <InputGroup.Text id="output-energia-excitacion">
-                E<sub>E</sub>=
-              </InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl
-              readOnly
-              placeholder="Energía de excitación"
-              aria-label="Energía de excitación"
-              aria-describedby="output-energia-excitacion"
-              value={getEnergiaDeExcitacion(z, n) || ""}
-            />
-            <InputGroup.Append>
-              <InputGroup.Text>eV</InputGroup.Text>
-            </InputGroup.Append>
-          </InputGroup>
+          {n !== "1" && (
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text id="output-energia-excitacion">
+                  E<sub>E</sub>=
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                readOnly
+                placeholder="Energía de excitación"
+                aria-label="Energía de excitación"
+                aria-describedby="output-energia-excitacion"
+                value={getEnergiaDeExcitacion(z, n) || ""}
+              />
+              <InputGroup.Append>
+                <InputGroup.Text>eV</InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
+          )}
           {n === "1" && (
             <InputGroup>
               <InputGroup.Prepend>
