@@ -95,14 +95,10 @@ export default function AcercaDe() {
       <Row>
         <h1>Acerca De</h1>
       </Row>
-      {miembros && miembros.map((miembro) => getMiembroElement(miembro))}
-      {getMiembroElement(
-        "Recursos gráficos",
-        <p>
-          Soy quien recopiló información y recursos gráficos para el simulador.
-        </p>,
-        "/images/ariadna.jpeg"
-      )}
+      {miembros &&
+        miembros.map((miembro, index) => (
+          <div key={index}>{getMiembroElement(miembro)}</div>
+        ))}
 
       <Row className="pt-3">
         <h2>Datos</h2>
@@ -117,7 +113,7 @@ export default function AcercaDe() {
           <tbody>
             {miembros &&
               miembros.map(({ nombre, matricula, carrera }) => (
-                <tr>
+                <tr key={nombre}>
                   <td>{nombre}</td>
                   <td>{matricula}</td>
                   <td>{carrera}</td>
