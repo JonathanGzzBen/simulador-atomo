@@ -53,24 +53,32 @@ export default function Teoria() {
             Energía de nivel (E<sub>n</sub>): Es la energía que tiene el átomo
             por tener a su electrón girando en un determinado nivel.
             <br />
+            <Image fluid src="/images/energia_nivel.png" />
           </li>
           <li>
             Energía de excitación (E<sub>E</sub>): Es la energía que se le debe
             suministrar al átomo para elevar a su electrón desde el estado base
-            (n=1) hasta cualquier estado excitado
+            (n=1) hasta cualquier estado excitado.
+            <br />
+            <Image fluid src="/images/energia_excitacion.png" />
           </li>
           <li>
             Energía de Ionización (E<sub>i</sub>): Es la energía que se le debe
             suministrar al átomo para liberar a su electrón siempre y cuando
             este se encuentre girando en el estado base (n=1).
+            <br />
+            <Image fluid src="/images/energia_ionizacion.png" />
           </li>
 
           <li>
             Energía de Enlace (E<sub>e</sub>): Es la energía que se le debe
             subministrar al átomo para liberar a su electrón cuando este se
             encuentre en cualquier estado excitado (nunca en n=1):
+            <br />
+            <Image fluid src="/images/energia_enlace.png" />
           </li>
         </ul>
+        <br />
         <Image fluid src="/images/explicacion-atomo-1.gif" />
         <Image fluid src="/images/explicacion-atomo-2.png" />
       </main>
