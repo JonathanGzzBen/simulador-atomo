@@ -36,13 +36,13 @@ export default function Simulator() {
       </Head>
       <h1>Simulador de problemas del átomo</h1>
       <Row className="pt-3">
-        <Col>
+        <Col md>
           <Image
             fluid
             src={n == 1 ? "/images/orbita_1.png" : "/images/orbita_n.png"}
           ></Image>
         </Col>
-        <Col>
+        <Col md>
           <InputGroup className="pt-2">
             <InputGroup.Prepend>
               <InputGroup.Text id="input-n">n = </InputGroup.Text>
