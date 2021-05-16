@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Container, Image } from "react-bootstrap";
+import { Col, Container, Image } from "react-bootstrap";
 export default function Teoria() {
   return (
     <>
@@ -53,7 +53,16 @@ export default function Teoria() {
             Energía de nivel (E<sub>n</sub>): Es la energía que tiene el átomo
             por tener a su electrón girando en un determinado nivel.
             <br />
-            <Image fluid src="/images/energia_nivel.png" className="w-50 p-5" />
+            <Image
+              fluid
+              src="/images/energia_nivel.png"
+              className="d-none d-lg-block w-50 p-5"
+            />
+            <Image
+              fluid
+              src="/images/energia_nivel.png"
+              className="d-lg-none p-5"
+            />
           </li>
           <li>
             Energía de excitación (E<sub>E</sub>): Es la energía que se le debe
@@ -63,7 +72,12 @@ export default function Teoria() {
             <Image
               fluid
               src="/images/energia_excitacion.png"
-              className="w-50 p-5"
+              className="d-none d-lg-block w-50 p-5"
+            />
+            <Image
+              fluid
+              src="/images/energia_excitacion.png"
+              className="d-lg-none p-5"
             />
           </li>
           <li>
@@ -74,7 +88,12 @@ export default function Teoria() {
             <Image
               fluid
               src="/images/energia_ionizacion.png"
-              className="w-50 p-5"
+              className="d-none d-lg-block w-50 p-5"
+            />
+            <Image
+              fluid
+              src="/images/energia_ionizacion.png"
+              className="d-lg-none p-5"
             />
           </li>
 
@@ -86,7 +105,12 @@ export default function Teoria() {
             <Image
               fluid
               src="/images/energia_enlace.png"
-              className="w-50 p-5"
+              className="d-none d-lg-block w-50 p-5"
+            />
+            <Image
+              fluid
+              src="/images/energia_enlace.png"
+              className="d-lg-none p-5"
             />
           </li>
         </ul>
