@@ -37,7 +37,10 @@ export default function Simulator() {
       <h1>Simulador de problemas del átomo</h1>
       <Row className="pt-3">
         <Col>
-          <Image fluid src="https://via.placeholder.com/350"></Image>
+          <Image
+            fluid
+            src={n == 1 ? "/images/orbita_1.png" : "/images/orbita_n.png"}
+          ></Image>
         </Col>
         <Col>
           <InputGroup className="pt-2">
