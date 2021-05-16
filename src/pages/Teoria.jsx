@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Image } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 export default function Teoria() {
   return (
     <>
@@ -39,7 +39,7 @@ export default function Teoria() {
           de neutrones en el núcleo. Esto se llama isótopo. Los isótopos tienen
           (casi) las mismas propiedades químicas, pero otras propiedades
           físicas. Se conoce más de un isótopo de prácticamente todos los
-          elementos.4
+          elementos.
         </p>
 
         <p>
@@ -53,21 +53,29 @@ export default function Teoria() {
             Energía de nivel (E<sub>n</sub>): Es la energía que tiene el átomo
             por tener a su electrón girando en un determinado nivel.
             <br />
-            <Image fluid src="/images/energia_nivel.png" />
+            <Image fluid src="/images/energia_nivel.png" className="w-50 p-5" />
           </li>
           <li>
             Energía de excitación (E<sub>E</sub>): Es la energía que se le debe
             suministrar al átomo para elevar a su electrón desde el estado base
             (n=1) hasta cualquier estado excitado.
             <br />
-            <Image fluid src="/images/energia_excitacion.png" />
+            <Image
+              fluid
+              src="/images/energia_excitacion.png"
+              className="w-50 p-5"
+            />
           </li>
           <li>
             Energía de Ionización (E<sub>i</sub>): Es la energía que se le debe
             suministrar al átomo para liberar a su electrón siempre y cuando
             este se encuentre girando en el estado base (n=1).
             <br />
-            <Image fluid src="/images/energia_ionizacion.png" />
+            <Image
+              fluid
+              src="/images/energia_ionizacion.png"
+              className="w-50 p-5"
+            />
           </li>
 
           <li>
@@ -75,12 +83,20 @@ export default function Teoria() {
             subministrar al átomo para liberar a su electrón cuando este se
             encuentre en cualquier estado excitado (nunca en n=1):
             <br />
-            <Image fluid src="/images/energia_enlace.png" />
+            <Image
+              fluid
+              src="/images/energia_enlace.png"
+              className="w-50 p-5"
+            />
           </li>
         </ul>
-        <br />
-        <Image fluid src="/images/explicacion-atomo-1.gif" />
-        <Image fluid src="/images/explicacion-atomo-2.png" />
+        <Container className="pt-5 text-center">
+          <p className="pb-3">
+            <strong>Representaciones visuales de lo explicado:</strong>
+          </p>
+          <Image fluid src="/images/explicacion-atomo-1.gif" />
+          <Image fluid src="/images/explicacion-atomo-2.png" />
+        </Container>
       </main>
     </>
   );
