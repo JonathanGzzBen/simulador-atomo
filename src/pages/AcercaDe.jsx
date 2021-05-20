@@ -18,19 +18,6 @@ const miembros = [
     carrera: "ITS",
   },
   {
-    title: "Investigador",
-    nombre: "Ricardo Hernández Cavazos",
-    description: (
-      <p>
-        Hola, soy Ricardo Hernández Cavazos y soy quien buscó la información
-        teórica para este simulador.
-      </p>
-    ),
-    imageUrl: "",
-    matricula: "1919238",
-    carrera: "IMT",
-  },
-  {
     title: "Diseñador",
     nombre: "Missael Alexis Porras Rocha",
     description: (
@@ -57,12 +44,12 @@ const miembros = [
     carrera: "IAS",
   },
   {
-    title: "Recursos gráficos",
+    title: "Investigadora",
     nombre: "Alejandra Coss Patiño",
     description: (
       <p>
-        Hola, soy Alejandra Coss Patiño y soy quien buscó los recurso gráficos
-        utilizados en la investigación.
+        Hola, soy Alejandra Coss Patiño y soy quien buscó la información
+        mostrada en la sección "Teoría".
       </p>
     ),
     imageUrl: "/images/alejandra.jpeg",
